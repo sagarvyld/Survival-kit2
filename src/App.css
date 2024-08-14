@@ -684,7 +684,7 @@ line-height: 120%; /* 14.4px */
   color: var(--Dark-Dark--100, #0E1928);
   font-feature-settings: 'clig' off, 'liga' off;
   font-family: Gilroy;
-  padding-left: 32px !important;
+  padding-left: 20px !important;
   font-size: 20px;
   font-style: normal;
   font-weight: 600;
