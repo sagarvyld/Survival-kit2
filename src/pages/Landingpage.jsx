@@ -24,27 +24,11 @@ const Landingpage = ({ skip, setskip }) => {
     setword((prevAnswer) => prevAnswer + emoji);
 };
 
-useEffect(() => {
-    if (cursorPosition !== null && contentEditableRef.current) {
-        const range = document.createRange();
-        const selection = window.getSelection();
-        const content = contentEditableRef.current.textContent;
-        if (cursorPosition > content.length) {
-            setCursorPosition(content.length);
-        }
-        const childNodes = contentEditableRef.current.childNodes;
-        if (childNodes.length > 0) {
-            const node = childNodes[0];
-            range.setStart(node, cursorPosition);
-            range.collapse(true);
-            selection.removeAllRanges();
-            selection.addRange(range);
-            contentEditableRef.current.focus();
-        } else {
-            console.warn("No child nodes found in contentEditable element");
-        }
+useEffect(()=>{
+    if(focus){
+        setsend(false);
     }
-}, [textAreaValue, cursorPosition]);
+},[focus])
 const removeLast = () => {
     setword((prevAnswer) => prevAnswer.slice(0, -2));
 };
