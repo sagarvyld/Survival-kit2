@@ -527,6 +527,11 @@ line-height: 120%; /* 38.4px */
   height: 0px;
 }
 .User_text_survival_2 {
+  display: flex;
+    justify-content: center; 
+    align-items: center;     
+    height: 100%;           
+    text-align: center;
   height: 68px;
   width: 209px;
   padding-left: 3px;
