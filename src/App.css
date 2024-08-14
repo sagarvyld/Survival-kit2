@@ -97,7 +97,7 @@ line-height: 120%; /* 38.4px */
 }
 
 .emoji-container_survival {
-  max-width: 355px;
+  max-width: 321px;
   flex-wrap: wrap;
   display: flex;
   gap: 10px;
@@ -126,7 +126,7 @@ line-height: 120%; /* 38.4px */
   position: absolute;
   align-items: center;
   justify-content: space-between;
-  top: 30px;
+  top: 14px;
 }
 
 .skip_container {
@@ -339,7 +339,7 @@ line-height: 120%; /* 38.4px */
 }
 
 ._real_svg_survival {
-  height: 360px;
+  height: 322px;
   transition: width 0.5s ease-in-out, height 0.5s ease-in-out;
   display: flex;
   justify-content: space-between;
@@ -530,7 +530,7 @@ line-height: 120%; /* 38.4px */
   bottom: 2vh !important;
 }
 .survival-mar{
-  margin-top: 324px !important;
+  margin-top: 252px !important;
 }
 .User_text_survival_2 {
   display: flex;
@@ -586,7 +586,8 @@ margin-bottom: 0px;
 }
 .guessbox_text_d2 {
   z-index: 3;
-  margin-top: -10px;
+  margin-top: -14px;
+  margin-bottom: -10px;
   color: var(--Light-Light--80, #E0E7F1);
 text-align: center;
 font-feature-settings: 'liga' off, 'clig' off;
