@@ -23,7 +23,7 @@ html {
 
 .heading_above_survival {
   position: absolute;
-  margin-bottom: 30px;
+  margin-bottom: -30px;
 }
 
 .you_got_a_survival {
@@ -526,6 +526,12 @@ line-height: 120%; /* 38.4px */
   left: 144px;
   height: 0px;
 }
+.survival-bottom{
+  bottom: 2vh !important;
+}
+.survival-mar{
+  margin-top: 324px !important;
+}
 .User_text_survival_2 {
   display: flex;
     justify-content: center; 
@@ -606,7 +612,7 @@ line-height: 120%; /* 14.4px */
 }
 
 .guess_main_container_survival {
-  margin-top: 415px;
+  margin-top: 467px;
   gap: 15px;
   position: absolute;
   display: flex;
@@ -677,7 +683,8 @@ line-height: 120%; /* 14.4px */
   color: var(--Dark-Dark--100, #0E1928);
   font-feature-settings: 'clig' off, 'liga' off;
   font-family: Gilroy;
-  font-size: 14px;
+  padding-left: 32px !important;
+  font-size: 20px;
   font-style: normal;
   font-weight: 600;
   box-sizing: border-box;

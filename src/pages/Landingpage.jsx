@@ -4,19 +4,74 @@ import { useState, useEffect } from "react";
 import Confetti from "react-confetti";
 import stringSimilarity from "string-similarity";
 import profile from "../assets/Profile.png";
-
+import EmojiKeyboard from "../components/EmojiKeyboard";
 const Landingpage = ({ skip, setskip }) => {
+    const [focus,setfocus]=useState(false);
   const [word, setword] = useState("");
   const [right, setright] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
+  const [cursorPosition, setCursorPosition] = useState(null);
+  const [textAreaValue, setTextAreaValue] = useState('');
+  const [emojis ,setEmojis]=useState([  '🌸', '🌼', '🌷', '🌹', '🌺', '🌻',
+    '🌞', '🌝', '🌛', '🌜', '🌚', '🌕',
+    '🌖', '🌗', '🌘', '🌑', '🌙', '🌟',
+    '🤐', '😯', '😪', '😫', '😴', '😌',
+    '🤹', '🛹', '🛼', '🏆', '🎯', '🎳',
+    '🌪️', '🌫️', '🌊', '🌋', '🏔️', '🏕️',
+    '🏜️', '🏝️', '🏞️', '🗻', '🌄', '🌅']);
+  const handleEmojiClick = (emoji) => {
+    setword((prevAnswer) => prevAnswer + emoji);
+};
+
+useEffect(() => {
+    if (cursorPosition !== null && contentEditableRef.current) {
+        const range = document.createRange();
+        const selection = window.getSelection();
+        const content = contentEditableRef.current.textContent;
+        if (cursorPosition > content.length) {
+            setCursorPosition(content.length);
+        }
+        const childNodes = contentEditableRef.current.childNodes;
+        if (childNodes.length > 0) {
+            const node = childNodes[0];
+            range.setStart(node, cursorPosition);
+            range.collapse(true);
+            selection.removeAllRanges();
+            selection.addRange(range);
+            contentEditableRef.current.focus();
+        } else {
+            console.warn("No child nodes found in contentEditable element");
+        }
+    }
+}, [textAreaValue, cursorPosition]);
+const removeLast = () => {
+    setword((prevAnswer) => prevAnswer.slice(0, -2));
+};
+
   const [message, setmessage] = useState(
     "Wow !! that’s a tough one and I have managed something let’s see if you get it"
   );
   const [Question, setQuestion] = useState("What would you carry with you if you get stranded at a");
   const [Answer, setAnswer] = useState("⛱️  💦 📱");
+  useEffect(()=>{
+    if(word===""){
+        setIsEmpty(true);
+    }else{
+        setIsEmpty(false);
+    }
+  },[word])
   const backward = () => {
-    setsend(false);
-    setIsEmpty(true);
+    if(send==true){
+        setsend(false);
+        setIsEmpty(true);
+        setfocus(false);
+        setword("");
+    }else{
+        setIsEmpty(true);
+        setfocus(false);
+        setword("");
+    }
+    
   };
   const triggerConfetti = () => {
     setShowConfetti(true);
@@ -77,7 +132,10 @@ const Landingpage = ({ skip, setskip }) => {
   useEffect(() => {
     if (!send) {
       setword("");
+    }else{
+        setfocus(false)
     }
+   
   }, [send]);
   useEffect(() => {
     if (isEmpty) {
@@ -106,9 +164,9 @@ const Landingpage = ({ skip, setskip }) => {
           </svg>
         </div>
       }
-      {!send ? (
+    
         <div className="upper_buttons_survival">
-          <button className="back_button">
+          <button className="back_button" onClick={() => backward()}>
             <svg
               width="24"
               height="24"
@@ -128,46 +186,14 @@ const Landingpage = ({ skip, setskip }) => {
             Skip
           </button>
         </div>
-      ) : (
-        <div className="upper_cross_button" onClick={() => backward()}>
-          <button>
-            <svg
-              width="26"
-              height="26"
-              viewBox="0 0 26 26"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <circle
-                cx="13"
-                cy="13"
-                r="12.25"
-                stroke="white"
-                stroke-width="1.5"
-              />
-              <path
-                d="M9 9L17 17"
-                stroke="white"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M17 9L9 17"
-                stroke="white"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </button>
-        </div>
-      )}
-      <div className="heading_above_survival">
+      
+      {!focus &&<div className="heading_above_survival">
         <p className="you_got_a_survival">You Got a</p>
         <p className="Survival_Kit">Survival Kit</p>
-      </div>
+      </div>}
       <GuessBox
+      setfocus={setfocus}
+      focus={focus}
         Answer={Answer}
         Question={Question}
         isEmpty={isEmpty}
@@ -178,7 +204,8 @@ const Landingpage = ({ skip, setskip }) => {
         right={setright}
         word={word}
       />
-      {!send && message !== "" && (
+       {focus &&<EmojiKeyboard onEmojiClick={handleEmojiClick} removeLast={removeLast} emojis={emojis.slice(0, 30)} remEmoji={emojis.slice(30, 32)} />}
+      {!send && !focus && message !== "" && (
         <div className="Lie_Information_survival">
           <div className="User_picture_survival">
             <img src={profile} alt="User" />
@@ -189,7 +216,7 @@ const Landingpage = ({ skip, setskip }) => {
 
       {!send && (
         <button
-          className="SpotPage_Submit"
+          className={`SpotPage_Submit ${focus && 'survival-bottom'}`}
           onClick={() => {
             forward();
           }}
