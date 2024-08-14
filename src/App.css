@@ -584,6 +584,9 @@ text-shadow:
 margin-bottom: 0px;
         
 }
+.guessbox_text_d2 p{
+  margin-bottom: 0px;
+}
 .guessbox_text_d2 {
   z-index: 3;
   margin-top: -14px;
