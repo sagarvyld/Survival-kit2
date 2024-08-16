@@ -8,47 +8,54 @@ import profile from "../assets/Profile.png";
 const Landingpage = ({ skip, setskip }) => {
   const [word, setword] = useState("");
   const [right, setright] = useState(false);
+ const [Island,setisland]=useState("Desert Island");
+  const [focus,setfocus]=useState(false)
   const [showConfetti, setShowConfetti] = useState(false);
+  console.log(focus)
   const [message, setmessage] = useState(
-    "Wow !! that’s a tough one and I have managed something let’s see if you get it"
+    ""
   );
   const [Question, setQuestion] = useState("What would you carry with you if you get stranded at a");
   const [Answer, setAnswer] = useState("⛱️  💦 📱");
   const backward = () => {
     setsend(false);
     setIsEmpty(true);
+    setword("")
   };
   const triggerConfetti = () => {
     setShowConfetti(true);
     setTimeout(() => setShowConfetti(false), 5000);
   };
 
-//   useEffect(() => {
-//     const urlParams = new URLSearchParams(window.location.search);
-//     const url = "https://vyld-cb-dev-api.vyld.io/api/v1/activity-games/game";
-//     const params = new URLSearchParams({
-//       activityId: urlParams.get("activityId"),
-//     });
-//     fetch(`${url}?${params}`, {
-//       method: "GET",
-//       headers: {},
-//     })
-//       .then((response) => {
-//         if (!response.ok) {
-//           throw new Error("Network response was not ok");
-//         }
-//         return response.json();
-//       })
-//       .then((data) => {
-//         const Data_coming = data.data;
-//         setQuestion(Data_coming.reqD[0].DCQues);
-//         setAnswer(Data_coming.reqD[0].DCSenAns);
-//         setmessage(Data_coming.message);
-//       })
-//       .catch((error) => {
-//         console.error("Error:", error);
-//       });
-//   }, []);
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const url = "https://vyld-cb-dev-api.vyld.io/api/v1/activity-games/game";
+    const params = new URLSearchParams({
+      activityId: urlParams.get("activityId"),
+    });
+    fetch(`${url}?${params}`, {
+      method: "GET",
+      headers: {},
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        const Data_coming = data.data.SKdata;
+        console.log(Data_coming)
+        
+        setQuestion(Data_coming.reqD[0].SKQues);
+        setAnswer(Data_coming.reqD[0].SKEmoji);
+        setmessage(Data_coming.message);
+        
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }, []);
 
   const [isEmpty, setIsEmpty] = useState(true);
   const [style, setstyle] = useState({});
@@ -77,6 +84,8 @@ const Landingpage = ({ skip, setskip }) => {
   useEffect(() => {
     if (!send) {
       setword("");
+    }else{
+        setfocus(false)
     }
   }, [send]);
   useEffect(() => {
@@ -106,8 +115,7 @@ const Landingpage = ({ skip, setskip }) => {
           </svg>
         </div>
       }
-      {!send ? (
-        <div className="upper_buttons_survival">
+        <div className="upper_buttons_survival" onClick={() => backward()}>
           <button className="back_button">
             <svg
               width="24"
@@ -128,46 +136,15 @@ const Landingpage = ({ skip, setskip }) => {
             Skip
           </button>
         </div>
-      ) : (
-        <div className="upper_cross_button" onClick={() => backward()}>
-          <button>
-            <svg
-              width="26"
-              height="26"
-              viewBox="0 0 26 26"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <circle
-                cx="13"
-                cy="13"
-                r="12.25"
-                stroke="white"
-                stroke-width="1.5"
-              />
-              <path
-                d="M9 9L17 17"
-                stroke="white"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M17 9L9 17"
-                stroke="white"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </button>
-        </div>
-      )}
-      <div className="heading_above_survival">
+      
+      {!focus &&<div className="heading_above_survival">
         <p className="you_got_a_survival">You Got a</p>
         <p className="Survival_Kit">Survival Kit</p>
-      </div>
+      </div>}
       <GuessBox
+      Island={Island}
+      focus={focus}
+      setfocus={setfocus}
         Answer={Answer}
         Question={Question}
         isEmpty={isEmpty}

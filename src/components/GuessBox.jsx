@@ -4,6 +4,9 @@ import Lock_i from "../assets/Lock.png";
 import Profile from "../assets/Profile.png";
 import Profile2 from "../assets/Profile2.png";
 const GuessBox = ({
+    Island,
+    focus,
+    setfocus,
   setIsEmpty,
   isEmpty,
   setword,
@@ -17,12 +20,14 @@ const GuessBox = ({
   const textareaRef = useRef(null);
 
   const handleFocus = () => {
+    setfocus(true);
     if (textareaRef.current) {
       textareaRef.current.setAttribute("inputmode", "text");
       textareaRef.current.setAttribute("enterkeyhint", "done");
     }
   };
   const handleBlur = () => {
+    setfocus(false)
     if (textareaRef.current) {
       textareaRef.current.removeAttribute("inputmode");
       textareaRef.current.removeAttribute("enterkeyhint");
@@ -48,7 +53,7 @@ const GuessBox = ({
   };
 
   return (
-    <div className={`guess_main_container_survival `}>
+    <div className={`guess_main_container_survival ${focus && 'ma-top'} `}>
       <div className={`guess_svg_survival `}>
         <div
           className={`_real_svg_survival _notsend_width_survival ${
@@ -69,10 +74,16 @@ const GuessBox = ({
               stroke-width="7"
             />
           </svg>
+  
+      <svg width="69" height={`${send?'48':'42'}`} className="atkins" viewBox="0 0 69 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M28.2685 39.6749L15.8339 16.1652L45.8299 0.291756L58.2881 23.7891L72.4303 1.27302L101.185 19.3142L87.0651 41.8441L113.642 42.8379L112.401 76.7524L85.8226 75.785L98.2575 99.2949L68.2613 115.168L55.8032 91.671L41.661 114.187L12.9061 96.1459L27.0262 73.616L0.449028 72.6221L1.69046 38.7077L28.2685 39.6749Z" fill="#0E1928" fill-opacity="0.1"/>
+</svg>
+
+
         </div>
       </div>
       <div className="guess_text_survival">{Question}</div>
-      <p className="Island">Deserted Island</p>
+      <p className="Island">{Island}</p>
       <div className="Lie_Information_survival_2">
         <div className="User_picture_survival_2">
           <img src={Profile} alt="User" />
@@ -87,6 +98,7 @@ const GuessBox = ({
       </div>
       <div className="guess_answer_survival">
         <textarea
+        value={word}
           ref={textareaRef}
           onChange={handleTextareaChange}
           onFocus={handleFocus}
@@ -105,12 +117,7 @@ const GuessBox = ({
           <p>Answers are revealed when you both answer</p>
         </div>
       )}
-      <div className="lower-atskin">
-      <svg width="69" height="48" viewBox="0 0 69 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M28.2685 39.6749L15.8339 16.1652L45.8299 0.291756L58.2881 23.7891L72.4303 1.27302L101.185 19.3142L87.0651 41.8441L113.642 42.8379L112.401 76.7524L85.8226 75.785L98.2575 99.2949L68.2613 115.168L55.8032 91.671L41.661 114.187L12.9061 96.1459L27.0262 73.616L0.449028 72.6221L1.69046 38.7077L28.2685 39.6749Z" fill="#0E1928" fill-opacity="0.1"/>
-</svg>
 
-      </div>
     </div>
   );
 };

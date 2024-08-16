@@ -23,11 +23,12 @@ html {
 
 .heading_above_survival {
   position: absolute;
-  margin-bottom: 30px;
+  margin-bottom: -50px;
 }
 
 .you_got_a_survival {
   color: var(--Neutral-Light, #FFF);
+  margin-bottom: -13px;
   text-align: center;
   font-feature-settings: 'clig' off, 'liga' off;
   font-family: Gilroy;
@@ -236,7 +237,7 @@ line-height: 120%; /* 38.4px */
 
 @media (max-height: 774px) {
   .Lie_Information_survival {
-    top: 70vh;
+    top: 73vh;
     margin-bottom: 0px;
   }
 }
@@ -339,7 +340,7 @@ line-height: 120%; /* 38.4px */
 }
 
 ._real_svg_survival {
-  height: 360px;
+  height: 320px;
   transition: width 0.5s ease-in-out, height 0.5s ease-in-out;
   display: flex;
   justify-content: space-between;
@@ -519,17 +520,20 @@ line-height: 120%; /* 38.4px */
   filter: blur(8px)
 
 }
-.lower-atskin{
+.ma-top{
+  margin-top: 330px !important;
+}
+.atkins{
+  transition: width 0.5s ease-in-out, height 0.5s ease-in-out;
   z-index: 3;
   position: relative;
-  top: -40px;
-  left: 144px;
-  height: 0px;
+  top: 87%;
 }
 .User_text_survival_2 {
   height: 68px;
   width: 209px;
-  padding-left: 3px;
+  justify-content: flex-start;
+    padding-left: 5px;
   color: var(--info-Error, #FF5372);
 text-align: center;
 font-feature-settings: 'liga' off, 'clig' off;
@@ -601,7 +605,8 @@ line-height: 120%; /* 14.4px */
 }
 
 .guess_main_container_survival {
-  margin-top: 415px;
+  transition: margin-top 0.5s ease-in-out;
+  margin-top: 467px;
   gap: 15px;
   position: absolute;
   display: flex;
@@ -641,7 +646,6 @@ line-height: 120%; /* 14.4px */
 }
 
 .guess_answer_survival textarea::placeholder {
-  padding-top: 10px;
   color: var(--Dark-Dark--50, #79889D);
   font-feature-settings: 'clig' off, 'liga' off;
   font-family: Gilroy;
@@ -669,6 +673,7 @@ line-height: 120%; /* 14.4px */
 
 .guess_answer_survival textarea {
   padding-right: 55px !important;
+  padding-top: 20px !important;
   color: var(--Dark-Dark--100, #0E1928);
   font-feature-settings: 'clig' off, 'liga' off;
   font-family: Gilroy;
