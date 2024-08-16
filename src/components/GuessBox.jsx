@@ -102,6 +102,7 @@ const GuessBox = ({
           onChange={handleChange}
           onFocus={handleFocus}
           onBlur={handleBlur}
+          readOnly={send}
           inputMode="text"
           enterKeyHint="done"
           placeholder="Add your answer here"
