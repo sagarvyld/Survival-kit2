@@ -7,9 +7,9 @@ const GuessBox = ({
     Island,
     focus,
     setfocus,
-  setIsEmpty,
-  isEmpty,
   setword,
+  setIsEmpty,
+  Empty,
   forward,
   send,
   right,
@@ -18,7 +18,14 @@ const GuessBox = ({
   Answer,
 }) => {
   const textareaRef = useRef(null);
-
+  const handleChange = (event) => {
+    setword(event.target.value);
+    if(word===""){
+        setIsEmpty(true);
+    }else{
+        setIsEmpty(false);
+    }
+  };
   const handleFocus = () => {
     setfocus(true);
     if (textareaRef.current) {
@@ -42,18 +49,10 @@ const GuessBox = ({
       }
     }
   };
-  const handleTextareaChange = (event) => {
-    const value = event.target.value.trim();
-    setword(value);
-    if (value === "") {
-      setIsEmpty(true);
-    } else {
-      setIsEmpty(false);
-    }
-  };
+  
 
   return (
-    <div className={`guess_main_container_survival ${focus && 'ma-top'} `}>
+    <div className={`guess_main_container_survival  `}>
       <div className={`guess_svg_survival `}>
         <div
           className={`_real_svg_survival _notsend_width_survival ${
@@ -100,14 +99,12 @@ const GuessBox = ({
         <textarea
         value={word}
           ref={textareaRef}
-          onChange={handleTextareaChange}
+          onChange={handleChange}
           onFocus={handleFocus}
           onBlur={handleBlur}
-          onKeyPress={handleKeyPress}
           inputMode="text"
           enterKeyHint="done"
           placeholder="Add your answer here"
-          readOnly={send}
           className={`${send ? "border_op" : ""}`}
         ></textarea>
         <img src={Profile2} className={`Profile2_survival `} />

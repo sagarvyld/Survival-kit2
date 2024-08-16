@@ -137,7 +137,7 @@ const Landingpage = ({ skip, setskip }) => {
           </button>
         </div>
       
-      {!focus &&<div className="heading_above_survival">
+      {<div className="heading_above_survival">
         <p className="you_got_a_survival">You Got a</p>
         <p className="Survival_Kit">Survival Kit</p>
       </div>}
