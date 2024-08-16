@@ -20,7 +20,8 @@ const GuessBox = ({
   const textareaRef = useRef(null);
   const handleChange = (event) => {
     setword(event.target.value);
-    if(word===""){
+
+    if(event.target.value===""){
         setIsEmpty(true);
     }else{
         setIsEmpty(false);

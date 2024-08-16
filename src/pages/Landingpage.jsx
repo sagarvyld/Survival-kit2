@@ -94,6 +94,7 @@ const Landingpage = ({ skip, setskip }) => {
     } else {
       setstyle({});
     }
+    console.log(isEmpty)
   }, [isEmpty, send]);
   return (
     <div className="app_container_survival">
